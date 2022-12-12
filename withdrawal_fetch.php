@@ -28,7 +28,7 @@ else:
       $fetch_stmt->bindValue(':userid', $userid, PDO::PARAM_INT);
       $fetch_stmt->execute();
       if ($fetch_stmt->rowCount()):
-        $data = $fetch_stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $fetch_stmt->fetchAll (PDO::FETCH_ASSOC);
         $returnData = $error_handler->getResponse(1, 200, 'User Withdraw History', array('list' => $data));
       else:
         $returnData = $error_handler->getResponse(0, 422, 'No Data found!');

@@ -39,6 +39,7 @@ async function withdraw() {
                 <td>${item.bankname}</td>
                 <td>${item.ifsc}</td>
                 <td>${item.accounttype}</td>
+                
               </tr>
             `
           )
