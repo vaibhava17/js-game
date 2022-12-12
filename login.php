@@ -55,7 +55,7 @@ else:
                             "user_role" => $row['role']
                         )
                     );
-                    $returnData = $error_handler->getResponse(1, 200, 'Login Successful!', array('mobile' => $row['mobile'],'token'=> $token));
+                    $returnData = $error_handler->getResponse(1, 200, 'Login Successful!', array('mobile' => $row['mobile'],'token'=> $token, 'role' => $row['role']));
                 else:
                     $returnData = $error_handler->getResponse(0, 422, 'Invalid Password!');
                 endif;
