@@ -667,7 +667,7 @@ async function deductBalance(currentBetBalance) {
 		}
 	});
 }
-let spinInProgress;
+var spinInProgress=false;
 function spin() {
 	spinInProgress=true;
 	console.log("spin in progress")
