@@ -70,7 +70,7 @@ else:
                             "user_role" => 'user',
                         )
                     );
-                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile,'token'=> $token));
+                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile,'token'=> $token, , 'role' => $row['role']));
                 else:
                     $returnData = $error_handler->getResponse(0, 500, 'Something went wrong!');
                 endif;
