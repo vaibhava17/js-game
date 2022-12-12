@@ -212,8 +212,10 @@ function buildBettingBoard() {
 
 			if (session == null) {
 				openLoginModal();
-			} else {
+			} else { if(spinInProgress!=false)
+				{
 				setBet(this, num, objType, 5);
+				}
 			}
 		};
 		ttbbetblock.oncontextmenu = function (e) {
@@ -250,7 +252,10 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
+					if(spinInProgress!=false)
+				{
 					setBet(this, num, objType, odd);
+				}
 				}
 			};
 			ttbbetblock.oncontextmenu = function (e) {
@@ -291,7 +296,10 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
+					if(spinInProgress!=false)
+				{
 					setBet(this, num, 'split', 17);
+				}
 				}
 			};
 			rtlbb.oncontextmenu = function (e) {
@@ -322,7 +330,10 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
+					if(spinInProgress!=false)
+				{
 					setBet(this, num, objType, 8);
+				}
 				}
 			};
 			cbbb.oncontextmenu = function (e) {
@@ -349,7 +360,10 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
+				if(spinInProgress!=false)
+				{
 				setBet(this, num, objType, 1);
+				}
 			}
 		};
 		bbtoptwo.oncontextmenu = function (e) {
@@ -372,7 +386,10 @@ function buildBettingBoard() {
 		if (session == null) {
 			openLoginModal();
 		} else {
+			if(spinInProgress!=false)
+				{
 			setBet(this, '0', objType, odds);
+				}
 		}
 	};
 	zero.oncontextmenu = function (e) {
@@ -398,7 +415,10 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
+					if(spinInProgress!=false)
+				{
 					setBet(this, '' + numberBlocks[a] + '', 'inside_whole', 35);
+				}
 				}
 			} else {
 				num = (a == 12) ? '3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36' : ((a == 25) ? '2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35' : '1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34');
@@ -406,7 +426,10 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
+					if(spinInProgress!=false)
+				{
 					setBet(this, num, 'outside_column', 2);
+				}
 				}
 			}
 		};
@@ -439,7 +462,10 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
+				if(spinInProgress!=false)
+				{
 				setBet(this, num, 'outside_dozen', 2);
+				}
 			}
 		};
 		bo3Block.oncontextmenu = function (e) {
@@ -466,7 +492,10 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
+				if(spinInProgress!=false)
+				{
 				setBet(this, num, 'outside_oerb', 1);
+				}
 			}
 		};
 		otoBlock.oncontextmenu = function (e) {
@@ -635,8 +664,9 @@ async function deductBalance(currentBetBalance) {
 		}
 	});
 }
-
+let spinInProgress;
 function spin() {
+	spinInProgress=true;
 	deductBalance(currentBet);
 	var winningSpin = Math.floor(Math.random() * 36);
 
@@ -658,6 +688,7 @@ function spin() {
 		}
 
 		currentBet = 0;
+		spinInProgress=false;
 
 		document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
 
