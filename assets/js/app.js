@@ -212,7 +212,7 @@ function buildBettingBoard() {
 
 			if (session == null) {
 				openLoginModal();
-			} else { if(spinInProgress!=false)
+			} else { if(spinInProgress==false)
 				{
 				setBet(this, num, objType, 5);
 				}
@@ -252,7 +252,7 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress!=false)
+					if(spinInProgress==false)
 				{
 					setBet(this, num, objType, odd);
 				}
@@ -296,7 +296,7 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress!=false)
+					if(spinInProgress==false)
 				{
 					setBet(this, num, 'split', 17);
 				}
@@ -330,7 +330,7 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress!=false)
+					if(spinInProgress==false)
 				{
 					setBet(this, num, objType, 8);
 				}
@@ -360,7 +360,7 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress!=false)
+				if(spinInProgress==false)
 				{
 				setBet(this, num, objType, 1);
 				}
@@ -386,7 +386,7 @@ function buildBettingBoard() {
 		if (session == null) {
 			openLoginModal();
 		} else {
-			if(spinInProgress!=false)
+			if(spinInProgress==false)
 				{
 			setBet(this, '0', objType, odds);
 				}
@@ -415,7 +415,7 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress!=false)
+					if(spinInProgress==false)
 				{
 					setBet(this, '' + numberBlocks[a] + '', 'inside_whole', 35);
 				}
@@ -426,7 +426,7 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress!=false)
+					if(spinInProgress==false)
 				{
 					setBet(this, num, 'outside_column', 2);
 				}
@@ -462,7 +462,7 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress!=false)
+				if(spinInProgress==false)
 				{
 				setBet(this, num, 'outside_dozen', 2);
 				}
@@ -492,7 +492,7 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress!=false)
+				if(spinInProgress==false)
 				{
 				setBet(this, num, 'outside_oerb', 1);
 				}
@@ -670,6 +670,7 @@ async function deductBalance(currentBetBalance) {
 let spinInProgress;
 function spin() {
 	spinInProgress=true;
+	console.log("spin in progress")
 	deductBalance(currentBet);
 	var winningSpin = Math.floor(Math.random() * 36);
 
@@ -692,6 +693,7 @@ function spin() {
 
 		currentBet = 0;
 		spinInProgress=false;
+		console.log("spin is stopped")
 
 		document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
 
