@@ -26,7 +26,7 @@ elseif (
   || !isset($data->accountname)
   || !isset($data->bankname)
   || !isset($data->ifsc)
-  || !isset($data->accounttype)
+  // || !isset($data->accounttype)
   || empty(trim($data->userid))
   || empty(trim($data->withdrawamount))
   || empty(trim($data->mobile))
@@ -34,7 +34,7 @@ elseif (
   || empty(trim($data->accountname))
   || empty(trim($data->bankname))
   || empty(trim($data->ifsc))
-  || empty(trim($data->accounttype))
+  // || empty(trim($data->accounttype))
 ):
   $fields = ['fields' => ['mobile', 'withdrawamount', 'accountnumber', 'accountname', 'bankname', 'ifsc', 'accounttype']];
   $returnData = $error_handler->getResponse(0, 422, 'Please Fill in all Required Fields!', $fields);
@@ -46,7 +46,7 @@ else:
   $accountname = trim($data->accountname);
   $bankname = trim($data->bankname);
   $ifsc = trim($data->ifsc);
-  $accounttype = trim($data->accounttype);
+  // $accounttype = trim($data->accounttype);
   $pattern = '/^[6-9]\d{9}$/';
   if (preg_match($pattern, $mobile) == 0):
     $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
@@ -61,7 +61,7 @@ else:
         if ($balance < $withdrawamount):
           $returnData = $error_handler->getResponse(0, 403, 'Insufficient Balance!');
         else:
-          $add_withdraw_request = "INSERT INTO `withdrawal` (userid,remainingbalance,withdrawamount,withdrawstatus,mobile, accountnumber, accountname, bankname, ifsc, accounttype) VALUES(:userid,:remainingbalance,:withdrawamount,:withdrawstatus,:mobile, :accountnumber, :accountname, :bankname, :ifsc, :accounttype)";
+          $add_withdraw_request = "INSERT INTO `withdrawal` (userid,remainingbalance,withdrawamount,withdrawstatus,mobile, accountnumber, accountname, bankname, ifsc) VALUES(:userid,:remainingbalance,:withdrawamount,:withdrawstatus,:mobile, :accountnumber, :accountname, :bankname, :ifsc)";
           $insert_stmt = $conn->prepare($add_withdraw_request);
           $insert_stmt->bindValue(':userid', $userid, PDO::PARAM_STR);
           $insert_stmt->bindValue(':remainingbalance', $balance - $withdrawamount, PDO::PARAM_STR);
@@ -72,7 +72,7 @@ else:
           $insert_stmt->bindValue(':accountname', $accountname, PDO::PARAM_STR);
           $insert_stmt->bindValue(':bankname', $bankname, PDO::PARAM_STR);
           $insert_stmt->bindValue(':ifsc', $ifsc, PDO::PARAM_STR);
-          $insert_stmt->bindValue(':accounttype', $accounttype, PDO::PARAM_STR);
+          // $insert_stmt->bindValue(':accounttype', $accounttype, PDO::PARAM_STR);
           if ($insert_stmt->execute()):
             $returnData = $error_handler->getResponse(1, 200, 'Withdrawal Request Sent Successfully!');
           else:

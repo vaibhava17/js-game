@@ -1039,7 +1039,7 @@ async function withdrawal(e) {
 	let amount = document.getElementById('withdrawal_amount').value
 	let bankname = document.getElementById('bank_name').value
 	let ifsc = document.getElementById('ifsc_code').value
-	let accounttype = document.getElementById('account_type').value
+	// let accounttype = document.getElementById('account_type').value
 	if (parseInt(amount) < 100) {
 		messageSpan.innerHTML = `Can not withdraw amount less then Rs 100`;
 		return
@@ -1056,8 +1056,8 @@ async function withdrawal(e) {
 			accountnumber: accountnumber,
 			accountname: accountname,
 			bankname: bankname,
-			ifsc: ifsc,
-			accounttype: accounttype
+			ifsc: ifsc
+			// accounttype: accounttype
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
