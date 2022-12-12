@@ -598,8 +598,11 @@ function setBet(e, n, t, o) {
 			spinBtn.innerText = 'spin';
 			spinBtn.onclick = function () {
 				this.remove();
-				spin();
-				audio.play()
+				if(currentBet!=0)
+				{
+					spin();
+					audio.play()}
+				
 			};
 			container.append(spinBtn);
 		}
