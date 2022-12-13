@@ -22,7 +22,7 @@ else:
 
    
    
-      $fetch_history = "SELECT * FROM `withdrawal` ";
+      $fetch_history = "SELECT * FROM `withdrawal` ASC ";
       $fetch_stmt = $conn->prepare($fetch_history);
       
       $fetch_stmt->execute();
