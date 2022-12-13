@@ -5,7 +5,9 @@ const env = {
 	//  apiUrl: 'http://localhost/game',
 }
 
+
 let session = localStorage.getItem('session');
+let ipAdress;
 var withdrawalBtn = document.getElementById("withdrawal-btn");
 var loginBtn = document.getElementById("login-btn");
 var registerBtn = document.getElementById("register-btn");
@@ -14,6 +16,7 @@ var logoutBtn = document.getElementById("logout-btn");
 
 
 var audio = new Audio("./audio.mp3");
+
 
 
 function toggleBtns() {
@@ -86,6 +89,8 @@ container.setAttribute('id', 'container');
 document.body.append(container);
 
 startGame();
+
+getIPaddress();
 
 let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
@@ -1008,6 +1013,21 @@ window.onclick = function (event) {
 	}
 }
 
+async function getIPaddress()
+{
+	await axios({
+		method:'get',
+		url: 'https://api.ipify.org?format=jsonp&callback=?'
+
+	}).then((res=>{
+ipAdress=res.data;
+	}))
+}
+
+
+
+
+
 // register function
 async function register(e) {
 	e.preventDefault();
@@ -1032,6 +1052,8 @@ async function register(e) {
 			addToken(res.data.token);
 			localStorage.setItem('token', res.data.token);
 			toggleBtns();
+
+			
 		} else {
 			alert(res.data.message);
 		}

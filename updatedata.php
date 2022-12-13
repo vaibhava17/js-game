@@ -22,7 +22,7 @@ else:
     if ($fetch_user_stmt->rowCount()):
       $user = $fetch_user_stmt->fetch(PDO::FETCH_ASSOC);
       if (!empty($user)):
-        $update_user = "UPDATE `users` SET `name`=:name, `email`=:email, `balance`=:balance, `role`=:role, WHERE `mobile`=:mobile";
+        $update_user = "UPDATE `users` SET `name`=:name, `email`=:email, `balance`=:balance,`role`=:role, WHERE `mobile`=:mobile";
         $update_user_stmt = $conn->prepare($update_user);
         $update_user_stmt->bindValue(':mobile', ($data->mobile ?? $user['mobile']), PDO::PARAM_STR);
         $update_user_stmt->bindValue(':name', ($data->name ?? $user['name']), PDO::PARAM_STR);
