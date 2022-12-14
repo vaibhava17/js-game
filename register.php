@@ -28,14 +28,16 @@ elseif (
     || empty(trim($data->mobile))
     || empty(trim($data->password))
     || empty(trim($data->confirm_password))
+    || empty(trim($data->ipaddress))
 ):
-    $fields = ['fields' => ['name', 'mobile', 'password', 'confirm_password']];
+    $fields = ['fields' => ['name', 'mobile', 'password', 'confirm_password','ipaddress']];
     $returnData = $error_handler->getResponse(0, 422, 'Please Fill in all Required Fields!', $fields);
 else:
     $name = trim($data->name);
     $mobile = trim($data->mobile);
     $password = trim($data->password);
     $confirm_password = trim($data->confirm_password);
+    $ipaddress =trim($data->ipaddress);
     // CHECKING THE MOLBILE FORMAT with regex
     $pattern = '/^[6-9]\d{9}$/';
     if (preg_match($pattern, $mobile) == 0):
@@ -53,14 +55,15 @@ else:
             if ($check_mobile_stmt->rowCount()):
                 $returnData = $error_handler->getResponse(0, 422, 'This mobile is already in use!');
             else:
-                $insert_query = "INSERT INTO `users`(name, mobile, password, balance, role, exposer) VALUES(:name,:mobile,:password, :balance, :role,:exposer)";
+                $insert_query = "INSERT INTO `users`(name, mobile, password, balance, role, exposer,ipaddress) VALUES(:name,:mobile,:password, :balance, :role,:exposer,:ipaddress)";
                 $insert_stmt = $conn->prepare($insert_query);
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
-                $insert_stmt->bindValue(':balance', 10, PDO::PARAM_INT);
+                $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
                 $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
+                $insert_stmt->bindValue(':ipaddress', $ipaddress, PDO::PARAM_STR);
                 if ($insert_stmt->execute()):
                     $jwt = new JwtHandler();
                     $token = $jwt->jwtEncodeData(
@@ -70,7 +73,7 @@ else:
                             "user_role" => 'user',
                         )
                     );
-                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile,'token'=> $token,  'role' => $row['role']));
+                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile,'token'=> $token));
                 else:
                     $returnData = $error_handler->getResponse(0, 500, 'Something went wrong!');
                 endif;

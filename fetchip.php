@@ -9,7 +9,7 @@ $error_handler = new ErrorHandler();
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
-if ($_SERVER["REQUEST_METHOD"] != "GET"):
+if ($_SERVER["REQUEST_METHOD"] != "POST"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
 elseif (empty($data) || !isset($data->ipaddress) || empty(trim($data->ipaddress))):
   $returnData = $error_handler->getResponse(0, 422, 'IP Address is required!');

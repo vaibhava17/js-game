@@ -42,7 +42,17 @@ $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
   alert((JSON.stringify(data, null, 2)));
 });
 </script> -->
-  </script>
+  <!-- </script> -->
+
+
+<script> if(( window.location.search.substr(1))=="app")
+document.getElementById("popup").innerHTML="<h2>Welcome to Biggest Gaming World</h2><p>For best experience please view in <bold>Landscape mode</bold></p>" ;
+    
+    
+
+
+</script>
+
   <!-- <script src="https://raw.githubusercontent.com/biggora/device-uuid/master/lib/device-uuid.min.js">
 
 
@@ -363,11 +373,9 @@ var logoutBtn = document.getElementById("logout-btn");
   </div>
   <!-- withdrawal modal end -->
   <!-- popup -->
-  <div class="popup">
-    <h2>Welcome to Biggest Gaming World</h2>
-    <p>For best experience please view in <bold>Landscape mode</bold></p>
-    <button id="close">Let's Go</button>
-  </div>
+  <!-- <div class="popup">
+
+  </div> -->
   <!-- popUp ends -->
   <!-- Main JS -->
   <script src="./assets/js/app.js"></script>

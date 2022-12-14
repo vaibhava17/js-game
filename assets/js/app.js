@@ -1,8 +1,8 @@
 const env = {
 	
-	 apiUrl: 'https://newkhel.in',
+	//  apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/js-game',
-	//  apiUrl: 'http://localhost/game',
+	 apiUrl: 'http://localhost/game',
 }
 
 
@@ -60,7 +60,7 @@ function logout() {
 	document.getElementById('bankSpan').innerText = '0';
 	
 
-	window.location.href = `${env.apiUrl}/index.html`;
+	window.location.href = `${env.apiUrl}`;
 	toggleBtns();
 }
 
@@ -90,7 +90,7 @@ document.body.append(container);
 
 startGame();
 
-getIPaddress();
+// getIPaddress();
 
 let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
@@ -1012,6 +1012,7 @@ window.onclick = function (event) {
 		registerModal.style.display = "none";
 	}
 }
+getIPaddress();
 
 async function getIPaddress()
 {
@@ -1021,20 +1022,84 @@ async function getIPaddress()
 
 	}).then((res=>{
 ipAdress=res.data;
+// alert(ipAdress)
+
 	}))
 }
 
 
 
 
+// function AddBonusProcess(){
+
+
+
+// fetchIPfromDB()
+
+
+
+// }
+
+let eligibleForBonus = false;
+
+async function fetchIPfromDB(){
+	// alert("yaha phch gya")
+		await axios({
+			method: 'post',
+			url: `${env.apiUrl}/fetchip.php`,
+			data: {
+			  ipaddress: ipAdress,
+			 
+			}
+		  }).then((res) => {
+		// alert(res.data.success)
+			if (res.data.success == 1) {
+				// alert(res.data.mobile)
+			//do not add bonus
+			//this means ip exist already . user is trying to create a new id with same device
+			} 
+			else {
+	//add balance
+	// alert(res.data.session)
+
+	eligibleForBonus = true;
+	
+	// alert(session)
+	// 			addBalance(10)
+	
+			}
+		  }).catch((err) => {
+			alert("Something went wrong!")
+		  });
+		
+		}
+	
 
 // register function
 async function register(e) {
 	e.preventDefault();
-	let name = document.getElementById('name').value
+let name = document.getElementById('name').value
 	let mobile = document.getElementById('register_mobile').value
 	let password = document.getElementById('register_password').value
 	let confirm_password = document.getElementById('confirm_password').value
+
+fetchIPfromDB().then(()=>{
+
+// alert(ipAdress)
+completeRegisterationProcess(name,mobile,password,confirm_password)
+	
+
+})
+
+	
+}
+
+
+
+
+
+async function completeRegisterationProcess(name , mobile, password,confirm_password)
+{
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/register.php`,
@@ -1042,7 +1107,8 @@ async function register(e) {
 			name: name,
 			mobile: mobile,
 			password: password,
-			confirm_password: confirm_password
+			confirm_password: confirm_password,
+			ipaddress:ipAdress
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
@@ -1052,14 +1118,23 @@ async function register(e) {
 			addToken(res.data.token);
 			localStorage.setItem('token', res.data.token);
 			toggleBtns();
+			// getIPaddress();
+			// AddBonusProcess();
 
-			
+			if(eligibleForBonus == true){
+				addBalance(10)
+			} 
+
 		} else {
 			alert(res.data.message);
 		}
 		closeRegisterModal();
 	});
 }
+
+
+
+
 
 // withdrawal modal
 var withdrawalModal = document.getElementById("withdrawal-modal");
