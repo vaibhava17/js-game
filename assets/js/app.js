@@ -1083,23 +1083,6 @@ let name = document.getElementById('name').value
 	let password = document.getElementById('register_password').value
 	let confirm_password = document.getElementById('confirm_password').value
 
-fetchIPfromDB().then(()=>{
-
-// alert(ipAdress)
-completeRegisterationProcess(name,mobile,password,confirm_password)
-	
-
-})
-
-	
-}
-
-
-
-
-
-async function completeRegisterationProcess(name , mobile, password,confirm_password)
-{
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/register.php`,
@@ -1121,9 +1104,6 @@ async function completeRegisterationProcess(name , mobile, password,confirm_pass
 			// getIPaddress();
 			// AddBonusProcess();
 
-			if(eligibleForBonus == true){
-				addBalance(10)
-			} 
 
 		} else {
 			alert(res.data.message);
@@ -1131,6 +1111,57 @@ async function completeRegisterationProcess(name , mobile, password,confirm_pass
 		closeRegisterModal();
 	});
 }
+
+
+
+// fetchIPfromDB().then(()=>{
+
+// // alert(ipAdress)
+// completeRegisterationProcess(name,mobile,password,confirm_password)
+	
+
+// })
+
+	
+// }
+
+
+
+
+
+// async function completeRegisterationProcess(name , mobile, password,confirm_password)
+// {
+// 	await axios({
+// 		method: 'post',
+// 		url: `${env.apiUrl}/register.php`,
+// 		data: {
+// 			name: name,
+// 			mobile: mobile,
+// 			password: password,
+// 			confirm_password: confirm_password,
+// 			ipaddress:ipAdress
+// 		}
+// 	}).then((res) => {
+// 		if (res.data.success == 1) {
+// 			session = res.data.mobile;
+// 			localStorage.setItem('session', res.data.mobile);
+// 			getBalance(res.data.mobile);
+// 			addToken(res.data.token);
+// 			localStorage.setItem('token', res.data.token);
+// 			toggleBtns();
+// 			// getIPaddress();
+// 			// AddBonusProcess();
+
+// 			if(eligibleForBonus == true){
+// 				addBalance(10)
+// 			} 
+
+// 		} else {
+// 			alert(res.data.message);
+// 		}
+// 		closeRegisterModal();
+// 	});
+// }
 
 
 
