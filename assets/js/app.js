@@ -1,13 +1,11 @@
 const env = {
-	
-	  apiUrl: 'https://newkhel.in',
+
+	apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/js-game',
-	// apiUrl: 'http://localhost/game',
+	//  apiUrl: 'http://localhost/game',
 }
 
-
 let session = localStorage.getItem('session');
-let ipAdress;
 var withdrawalBtn = document.getElementById("withdrawal-btn");
 var loginBtn = document.getElementById("login-btn");
 var registerBtn = document.getElementById("register-btn");
@@ -16,7 +14,6 @@ var logoutBtn = document.getElementById("logout-btn");
 
 
 var audio = new Audio("./audio.mp3");
-
 
 
 function toggleBtns() {
@@ -58,9 +55,9 @@ function logout() {
 
 	bankValue = 0;
 	document.getElementById('bankSpan').innerText = '0';
-	
 
-	window.location.href = `${env.apiUrl}`;
+
+	window.location.href = `${env.apiUrl}/index.html`;
 	toggleBtns();
 }
 
@@ -89,8 +86,6 @@ container.setAttribute('id', 'container');
 document.body.append(container);
 
 startGame();
-
-// getIPaddress();
 
 let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
@@ -217,9 +212,9 @@ function buildBettingBoard() {
 
 			if (session == null) {
 				openLoginModal();
-			} else { if(spinInProgress==false)
-				{
-				setBet(this, num, objType, 5);
+			} else {
+				if (spinInProgress == false) {
+					setBet(this, num, objType, 5);
 				}
 			}
 		};
@@ -257,10 +252,9 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress==false)
-				{
-					setBet(this, num, objType, odd);
-				}
+					if (spinInProgress == false) {
+						setBet(this, num, objType, odd);
+					}
 				}
 			};
 			ttbbetblock.oncontextmenu = function (e) {
@@ -301,10 +295,9 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress==false)
-				{
-					setBet(this, num, 'split', 17);
-				}
+					if (spinInProgress == false) {
+						setBet(this, num, 'split', 17);
+					}
 				}
 			};
 			rtlbb.oncontextmenu = function (e) {
@@ -335,10 +328,9 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress==false)
-				{
-					setBet(this, num, objType, 8);
-				}
+					if (spinInProgress == false) {
+						setBet(this, num, objType, 8);
+					}
 				}
 			};
 			cbbb.oncontextmenu = function (e) {
@@ -365,9 +357,8 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress==false)
-				{
-				setBet(this, num, objType, 1);
+				if (spinInProgress == false) {
+					setBet(this, num, objType, 1);
 				}
 			}
 		};
@@ -391,10 +382,9 @@ function buildBettingBoard() {
 		if (session == null) {
 			openLoginModal();
 		} else {
-			if(spinInProgress==false)
-				{
-			setBet(this, '0', objType, odds);
-				}
+			if (spinInProgress == false) {
+				setBet(this, '0', objType, odds);
+			}
 		}
 	};
 	zero.oncontextmenu = function (e) {
@@ -420,10 +410,9 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress==false)
-				{
-					setBet(this, '' + numberBlocks[a] + '', 'inside_whole', 35);
-				}
+					if (spinInProgress == false) {
+						setBet(this, '' + numberBlocks[a] + '', 'inside_whole', 35);
+					}
 				}
 			} else {
 				num = (a == 12) ? '3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36' : ((a == 25) ? '2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35' : '1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34');
@@ -431,10 +420,9 @@ function buildBettingBoard() {
 				if (session == null) {
 					openLoginModal();
 				} else {
-					if(spinInProgress==false)
-				{
-					setBet(this, num, 'outside_column', 2);
-				}
+					if (spinInProgress == false) {
+						setBet(this, num, 'outside_column', 2);
+					}
 				}
 			}
 		};
@@ -467,9 +455,8 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress==false)
-				{
-				setBet(this, num, 'outside_dozen', 2);
+				if (spinInProgress == false) {
+					setBet(this, num, 'outside_dozen', 2);
 				}
 			}
 		};
@@ -497,9 +484,8 @@ function buildBettingBoard() {
 			if (session == null) {
 				openLoginModal();
 			} else {
-				if(spinInProgress==false)
-				{
-				setBet(this, num, 'outside_oerb', 1);
+				if (spinInProgress == false) {
+					setBet(this, num, 'outside_oerb', 1);
 				}
 			}
 		};
@@ -534,16 +520,15 @@ function buildBettingBoard() {
 				wager = parseInt(chip.childNodes[0].innerText);
 			} else {
 
-if(currentBet!=0)
-{
+				if (currentBet != 0) {
 
-				bankValue = bankValue + currentBet;
-				currentBet = 0;
-				document.getElementById('bankSpan').innerText = '' + bankValue.toLocaleString("en-GB") + '';
-				document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
-				clearBet();
-				removeChips();
-}
+					bankValue = bankValue + currentBet;
+					currentBet = 0;
+					document.getElementById('bankSpan').innerText = '' + bankValue.toLocaleString("en-GB") + '';
+					document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
+					clearBet();
+					removeChips();
+				}
 			}
 		};
 		let chipSpan = document.createElement('span');
@@ -603,11 +588,11 @@ function setBet(e, n, t, o) {
 			spinBtn.innerText = 'spin';
 			spinBtn.onclick = function () {
 				this.remove();
-				if(currentBet!=0)
-				{
+				if (currentBet != 0) {
 					spin();
-					audio.play()}
-				
+					audio.play()
+				}
+
 			};
 			container.append(spinBtn);
 		}
@@ -672,9 +657,9 @@ async function deductBalance(currentBetBalance) {
 		}
 	});
 }
-var spinInProgress=false;
+var spinInProgress = false;
 function spin() {
-	spinInProgress=true;
+	spinInProgress = true;
 	console.log("spin in progress")
 	deductBalance(currentBet);
 	var winningSpin = Math.floor(Math.random() * 36);
@@ -697,7 +682,7 @@ function spin() {
 		}
 
 		currentBet = 0;
-		spinInProgress=false;
+		spinInProgress = false;
 		console.log("spin is stopped")
 
 		document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
@@ -888,7 +873,7 @@ async function login(e) {
 	await axios({
 		method: 'post',
 		// url: `${env.apiUrl}/login.php`,
-		
+
 		url: `${env.apiUrl}/login.php`,
 		data: {
 			mobile: mobile,
@@ -897,20 +882,20 @@ async function login(e) {
 	}).then((res) => {
 		if (res.data.success == 1) {
 			session = res.data.mobile;
-			
+
 			localStorage.setItem('session', res.data.mobile);
 
-			
+
 			localStorage.setItem('token', res.data.token);
 
 
-			
+
 			getBalance(res.data.mobile);
 			addToken(res.data.token);
 
 			// alert(res.data.token);
 			toggleBtns();
-			
+
 		} else {
 			alert(res.data.message);
 		}
@@ -919,8 +904,7 @@ async function login(e) {
 }
 
 
-async function addToken(token)
-{
+async function addToken(token) {
 
 
 	let data = {
@@ -935,38 +919,36 @@ async function addToken(token)
 		data: data
 	}).then(res => {
 
-		
+
 		console.log(res)
-	
-	
+
+
 	})
 
 }
 
-var intervalId = window.setInterval(function(){
+var intervalId = window.setInterval(function () {
 
-if(session!=null)
-{
-	fetchToken();
+	if (session != null) {
+		fetchToken();
 
-}
-  }, 5000);
-
+	}
+}, 5000);
 
 
-  async function fetchToken()
-{
+
+async function fetchToken() {
 
 	let tokenInLocalStr = localStorage.getItem('token');
 
 	// alert(tokenInLocalStr);
 
-	
-	
+
+
 
 
 	let data = {
-	
+
 		mobile: session,
 	}
 
@@ -976,15 +958,14 @@ if(session!=null)
 		url: `${env.apiUrl}/fetchToken.php`,
 		data: data
 	}).then(res => {
-	
-		console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : "+  res.data.token);
-		if(res.data.token!=tokenInLocalStr)
-		{
 
-			
+		console.log(" token stored in localstorage :  " + tokenInLocalStr + " token stored in database : " + res.data.token);
+		if (res.data.token != tokenInLocalStr) {
+
+
 			logout();
 		}
-	
+
 	})
 }
 
@@ -1012,77 +993,14 @@ window.onclick = function (event) {
 		registerModal.style.display = "none";
 	}
 }
-getIPaddress();
-
-async function getIPaddress()
-{
-	await axios({
-		method:'get',
-		url: 'https://api.ipify.org?format=jsonp&callback=?'
-
-	}).then((res=>{
-ipAdress=res.data;
-// alert(ipAdress)
-
-	}))
-}
-
-
-
-
-// function AddBonusProcess(){
-
-
-
-// fetchIPfromDB()
-
-
-
-// }
-
-let eligibleForBonus = false;
-
-async function fetchIPfromDB(){
-	// alert("yaha phch gya")
-		await axios({
-			method: 'post',
-			url: `${env.apiUrl}/fetchip.php`,
-			data: {
-			  ipaddress: ipAdress,
-			 
-			}
-		  }).then((res) => {
-		// alert(res.data.success)
-			if (res.data.success == 1) {
-				// alert(res.data.mobile)
-			//do not add bonus
-			//this means ip exist already . user is trying to create a new id with same device
-			} 
-			else {
-	//add balance
-	// alert(res.data.session)
-
-	eligibleForBonus = true;
-	
-	// alert(session)
-	// 			addBalance(10)
-	
-			}
-		  }).catch((err) => {
-			alert("Something went wrong!")
-		  });
-		
-		}
-	
 
 // register function
 async function register(e) {
 	e.preventDefault();
-let name = document.getElementById('name').value
+	let name = document.getElementById('name').value
 	let mobile = document.getElementById('register_mobile').value
 	let password = document.getElementById('register_password').value
 	let confirm_password = document.getElementById('confirm_password').value
-
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/register.php`,
@@ -1090,8 +1008,7 @@ let name = document.getElementById('name').value
 			name: name,
 			mobile: mobile,
 			password: password,
-			confirm_password: confirm_password,
-			ipaddress:ipAdress
+			confirm_password: confirm_password
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
@@ -1101,71 +1018,12 @@ let name = document.getElementById('name').value
 			addToken(res.data.token);
 			localStorage.setItem('token', res.data.token);
 			toggleBtns();
-			// getIPaddress();
-			// AddBonusProcess();
-
-
 		} else {
 			alert(res.data.message);
 		}
 		closeRegisterModal();
 	});
 }
-
-
-
-// fetchIPfromDB().then(()=>{
-
-// // alert(ipAdress)
-// completeRegisterationProcess(name,mobile,password,confirm_password)
-	
-
-// })
-
-	
-// }
-
-
-
-
-
-// async function completeRegisterationProcess(name , mobile, password,confirm_password)
-// {
-// 	await axios({
-// 		method: 'post',
-// 		url: `${env.apiUrl}/register.php`,
-// 		data: {
-// 			name: name,
-// 			mobile: mobile,
-// 			password: password,
-// 			confirm_password: confirm_password,
-// 			ipaddress:ipAdress
-// 		}
-// 	}).then((res) => {
-// 		if (res.data.success == 1) {
-// 			session = res.data.mobile;
-// 			localStorage.setItem('session', res.data.mobile);
-// 			getBalance(res.data.mobile);
-// 			addToken(res.data.token);
-// 			localStorage.setItem('token', res.data.token);
-// 			toggleBtns();
-// 			// getIPaddress();
-// 			// AddBonusProcess();
-
-// 			if(eligibleForBonus == true){
-// 				addBalance(10)
-// 			} 
-
-// 		} else {
-// 			alert(res.data.message);
-// 		}
-// 		closeRegisterModal();
-// 	});
-// }
-
-
-
-
 
 // withdrawal modal
 var withdrawalModal = document.getElementById("withdrawal-modal");
