@@ -520,19 +520,21 @@ function buildBettingBoard() {
 				wager = parseInt(chip.childNodes[0].innerText);
 			} else {
 
-				if (currentBet != 0) {
+				if (currentBet != 0 && spinInProgress==false) {
 
 					bankValue = bankValue + currentBet;
 					currentBet = 0;
 					document.getElementById('bankSpan').innerText = '' + bankValue.toLocaleString("en-GB") + '';
 					document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
 
-
-					if (spinInProgress=false)
+					if(spinInProgress==false)
 					{
+				
 					clearBet();
 					removeChips();
 					}
+					
+			
 				}
 			}
 		};
