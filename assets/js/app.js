@@ -1,8 +1,8 @@
 const env = {
 
-	apiUrl: 'https://newkhel.in',
+	// apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/js-game',
-	//  apiUrl: 'http://localhost/game',
+	 apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
@@ -526,8 +526,13 @@ function buildBettingBoard() {
 					currentBet = 0;
 					document.getElementById('bankSpan').innerText = '' + bankValue.toLocaleString("en-GB") + '';
 					document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
+
+
+					if (spinInProgress=false)
+					{
 					clearBet();
 					removeChips();
+					}
 				}
 			}
 		};
@@ -728,10 +733,13 @@ async function addBalance(balance) {
 //major function
 function win(winningSpin, winValue, betTotal) {
 	if (winValue > 0) {
+
+
+		
 		addBalance(winValue + betTotal)
-		console.log("winning spin ka number jo ayega wo  hai ye  " + `${winningSpin}`);
-		console.log("winning value  " + `${winValue}`);
-		console.log("bet value  " + `${betTotal}`);
+		// alert("winning spin ka number jo ayega wo  hai ye  " + `${winningSpin}`);
+		// alert("winning value  " + `${winValue}`);
+		// alert("bet value  " + `${betTotal}`);
 		let notification = document.createElement('div');
 		notification.setAttribute('id', 'notification');
 		let nSpan = document.createElement('div');
