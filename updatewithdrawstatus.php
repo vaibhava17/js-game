@@ -17,7 +17,7 @@ $returnData = [];
 $withdrawid = isset($_GET['withdrawid']) ? $_GET['withdrawid'] : null;
 $withdrawstatus = isset($_GET['withdrawstatus']) ? $_GET['withdrawstatus'] : null;
 
-if ($_SERVER["REQUEST_METHOD"] != "PUT"):
+if ($_SERVER["REQUEST_METHOD"] != "POST"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
 else:
   if (empty($data) && (empty($withdrawid) )):
